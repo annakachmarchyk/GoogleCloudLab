@@ -1,18 +1,24 @@
 package ua.edu.ucu.apps;
 
-public class TimedDocument extends SmartDocument {
+public class TimedDocument implements Document {
 
-    public TimedDocument(String gcsPath) {
-        super(gcsPath);
+    private SmartDocument decoratedDocument;
+
+    public TimedDocument(Document document) {
+        this.decoratedDocument = (SmartDocument) document;
     }
 
     @Override
     public String parse() {
         long startTime = System.nanoTime();
-        String text = super.parse();
+        String text = decoratedDocument.parse();
         long endTime = System.nanoTime();
 
         System.out.println("Parsing time: " + (endTime - startTime) / 1000000 + " ms");
         return text;
+    }
+
+    public String getGcsPath() {
+        return decoratedDocument.getGcsPath();
     }
 }

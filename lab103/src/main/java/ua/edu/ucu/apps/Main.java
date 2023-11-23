@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Document sd = new SmartDocument("gs://cv-examples/wiki.png");
         System.out.println(sd.parse());
-        Document timedDocument = new TimedDocument("gs://cv-examples/wiki.png");
+        Document timedDocument = new TimedDocument(sd);
         System.out.println(timedDocument.parse());
         String url = "jdbc:sqlite:your-database-file.db";
 
